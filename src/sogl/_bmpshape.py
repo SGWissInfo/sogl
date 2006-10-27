@@ -1,13 +1,14 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 #----------------------------------------------------------------------------
 # Name:         bmpshape.py
-# Purpose:      Bitmap shape
+# Purpose:      Bitmap Shape
 #
-# Author:       Pierre Hj‰lm (from C++ original by Julian Smart)
+# Author:       Klaus Zimmermann <klaus.zimmermann@fmf.uni-freiburg.de>
+# Heavily based on work by Pierre Hj√§lm. See OGL in wxPython.
 #
-# Created:      2004-05-08
-# RCS-ID:       $Id: _bmpshape.py,v 1.2 2004/06/18 16:32:02 RD Exp $
-# Copyright:    (c) 2004 Pierre Hj‰lm - 1998 Julian Smart
+# Created:      26-10-2006
+# SVN-ID:       $Id: $
+# Copyright:    (c) 2006 Klaus Zimmermann - 2004 Pierre Hj√§lm - 1998 Julian Smart
 # Licence:      wxWindows license
 #----------------------------------------------------------------------------
 

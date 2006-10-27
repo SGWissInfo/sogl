@@ -1,25 +1,26 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 #----------------------------------------------------------------------------
 # Name:         basic.py
-# Purpose:      The basic OGL shapes
+# Purpose:      The basic SOGL shapes
 #
-# Author:       Pierre Hj‰lm (from C++ original by Julian Smart)
+# Author:       Klaus Zimmermann <klaus.zimmermann@fmf.uni-freiburg.de>
+# Heavily based on work by Pierre Hj√§lm. See OGL in wxPython.
 #
-# Created:      2004-05-08
-# RCS-ID:       $Id: _basic.py,v 1.17 2006/05/05 19:09:04 RD Exp $
-# Copyright:    (c) 2004 Pierre Hj‰lm - 1998 Julian Smart
+# Created:      26-10-2006
+# SVN-ID:       $Id: $
+# Copyright:    (c) 2006 Klaus Zimmermann - 2004 Pierre Hj√§lm - 1998 Julian Smart
 # Licence:      wxWindows license
 #----------------------------------------------------------------------------
 
 import wx
 import math
 
-from _oglmisc import *
+from _soglmisc import *
 
 DragOffsetX = 0.0
 DragOffsetY = 0.0
 
-def OGLInitialize():
+def SOGLInitialize():
     global WhiteBackgroundPen, WhiteBackgroundBrush, TransparentPen
     global BlackForegroundPen, NormalFont
     
@@ -32,7 +33,7 @@ def OGLInitialize():
     NormalFont = wx.Font(10, wx.SWISS, wx.NORMAL, wx.NORMAL)
 
 
-def OGLCleanUp():
+def SOGLCleanUp():
     pass
 
 
@@ -210,7 +211,7 @@ class ShapeEvtHandler(object):
 
             
 class Shape(ShapeEvtHandler):
-    """OGL base class
+    """SOGL base class
 
     Shape(canvas = None)
     
@@ -2743,7 +2744,7 @@ class PolygonShape(Shape):
 
             self._originalPoints[i] = x1 * cosTheta - y1 * sinTheta + x * (1 - cosTheta) + y * sinTheta, x1 * sinTheta + y1 * cosTheta + y * (1 - cosTheta) + x * sinTheta
 
-        # Added by Pierre Hj‰lm. If we don't do this the outline will be
+        # Added by Pierre Hj√§lm. If we don't do this the outline will be
         # the wrong size. Hopefully it won't have any ill effects.
         self.UpdateOriginalPoints()
         

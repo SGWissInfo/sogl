@@ -1,20 +1,21 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 #----------------------------------------------------------------------------
 # Name:         drawn.py
 # Purpose:      DrawnShape class
 #
-# Author:       Pierre Hj‰lm (from C++ original by Julian Smart)
+# Author:       Klaus Zimmermann <klaus.zimmermann@fmf.uni-freiburg.de>
+# Heavily based on work by Pierre Hj√§lm. See OGL in wxPython.
 #
-# Created:      2004-08-25
-# RCS-ID:       $Id: _drawn.py,v 1.3 2006/02/03 06:51:34 RD Exp $
-# Copyright:    (c) 2004 Pierre Hj‰lm - 1998 Julian Smart
-# License:      wxWindows license
+# Created:      26-10-2006
+# SVN-ID:       $Id: $
+# Copyright:    (c) 2006 Klaus Zimmermann - 2004 Pierre Hj√§lm - 1998 Julian Smart
+# Licence:      wxWindows license
 #----------------------------------------------------------------------------
 
 import os.path
 
 from _basic import RectangleShape
-from _oglmisc import *
+from _soglmisc import *
 
 METAFLAGS_OUTLINE         = 1
 METAFLAGS_ATTACHMENTS     = 2
@@ -487,7 +488,7 @@ class PseudoMetaFile(object):
     def CalculateSize(self, shape):
         boundMinX, boundMinY, boundMaxX, boundMaxY = self.GetBounds()
 
-        # By Pierre Hj‰lm: This is NOT in the old version, which
+        # By Pierre Hj√§lm: This is NOT in the old version, which
         # gets this totally wrong. Since the drawing is centered, we
         # cannot get the width by measuring from left to right, we
         # must instead make enough room to handle the largest

@@ -1,13 +1,14 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 #----------------------------------------------------------------------------
 # Name:         composit.py
 # Purpose:      Composite class
 #
-# Author:       Pierre Hj‰lm (from C++ original by Julian Smart)
+# Author:       Klaus Zimmermann <klaus.zimmermann@fmf.uni-freiburg.de>
+# Heavily based on work by Pierre Hj√§lm. See OGL in wxPython.
 #
-# Created:      2004-05-08
-# RCS-ID:       $Id: _composit.py,v 1.5 2006/02/03 06:51:34 RD Exp $
-# Copyright:    (c) 2004 Pierre Hj‰lm - 1998 Julian Smart
+# Created:      26-10-2006
+# SVN-ID:       $Id: $
+# Copyright:    (c) 2006 Klaus Zimmermann - 2004 Pierre Hj√§lm - 1998 Julian Smart
 # Licence:      wxWindows license
 #----------------------------------------------------------------------------
 
@@ -15,7 +16,7 @@ import sys
 import wx
 
 from _basic import RectangleShape, Shape, ControlPoint
-from _oglmisc import *
+from _soglmisc import *
 
 KEY_SHIFT, KEY_CTRL = 1, 2
 

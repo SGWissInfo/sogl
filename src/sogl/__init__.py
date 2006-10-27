@@ -1,3 +1,17 @@
+# -*- coding: utf-8 -*-
+#----------------------------------------------------------------------------
+# Name:         __init__.py
+# Purpose:      Package initialization
+#
+# Author:       Klaus Zimmermann <klaus.zimmermann@fmf.uni-freiburg.de>
+# Heavily based on work by Pierre Hjälm. See OGL in wxPython.
+#
+# Created:      26-10-2006
+# SVN-ID:       $Id: $
+# Copyright:    (c) 2006 Klaus Zimmermann - 2004 Pierre Hjälm - 1998 Julian Smart
+# Licence:      wxWindows license
+#----------------------------------------------------------------------------
+
 """
 The Object Graphics Library provides for simple drawing and manipulation
 of 2D objects.
