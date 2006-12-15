@@ -5,12 +5,11 @@ from setuptools import setup
 
 __id__ = '$Id$'
 __revision__ = '$Revision$'
-__head__ = '$Head: $'
 
 VERSION = '0.2.0'
 
 setup(name='sogl',
-      version='%s-%s'%(VERSION, __revision__[11:-2]),
+      version='%s'%VERSION,
       description='Simplified Object Graph Library',
       author='Klaus Zimmermann',
       author_email='klaus.zimmermann@fmf.uni-freiburg.de',
