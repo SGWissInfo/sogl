@@ -7,7 +7,7 @@
 # Heavily based on work by Pierre Hjälm. See OGL in wxPython.
 #
 # Created:      26-10-2006
-# SVN-ID:       $Id: $
+# SVN-ID:       $Id$
 # Copyright:    (c) 2006 Klaus Zimmermann - 2004 Pierre Hjälm - 1998 Julian Smart
 # Licence:      wxWindows license
 #----------------------------------------------------------------------------
