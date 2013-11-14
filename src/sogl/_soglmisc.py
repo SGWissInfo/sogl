@@ -206,7 +206,7 @@ def CentreText(dc, text_list, xpos, ypos, width, height, formatMode):
 
         line.SetX(x - xOffset)
         line.SetY(y - yOffset)
-        
+
 
 
 def DrawFormattedText(dc, text_list, xpos, ypos, width, height, formatMode):
@@ -357,7 +357,7 @@ def GetArrowPoints(x1, y1, x2, y2, length, width):
 
     i_bar = (x2 - x1) / l
     j_bar = (y2 - y1) / l
-    
+
     x3 = -length * i_bar + x2
     y3 = -length * j_bar + y2
 

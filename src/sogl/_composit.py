@@ -43,21 +43,21 @@ CONSTRAINT_MIDALIGNED_RIGHT     = 15
 
 
 # Backwards compatibility names.  These should be removed eventually.
-gyCONSTRAINT_CENTRED_VERTICALLY   = CONSTRAINT_CENTRED_VERTICALLY   
-gyCONSTRAINT_CENTRED_HORIZONTALLY = CONSTRAINT_CENTRED_HORIZONTALLY 
-gyCONSTRAINT_CENTRED_BOTH         = CONSTRAINT_CENTRED_BOTH         
-gyCONSTRAINT_LEFT_OF              = CONSTRAINT_LEFT_OF              
-gyCONSTRAINT_RIGHT_OF             = CONSTRAINT_RIGHT_OF             
-gyCONSTRAINT_ABOVE                = CONSTRAINT_ABOVE                
-gyCONSTRAINT_BELOW                = CONSTRAINT_BELOW                
-gyCONSTRAINT_ALIGNED_TOP          = CONSTRAINT_ALIGNED_TOP          
-gyCONSTRAINT_ALIGNED_BOTTOM       = CONSTRAINT_ALIGNED_BOTTOM       
-gyCONSTRAINT_ALIGNED_LEFT         = CONSTRAINT_ALIGNED_LEFT         
-gyCONSTRAINT_ALIGNED_RIGHT        = CONSTRAINT_ALIGNED_RIGHT        
-gyCONSTRAINT_MIDALIGNED_TOP       = CONSTRAINT_MIDALIGNED_TOP       
-gyCONSTRAINT_MIDALIGNED_BOTTOM    = CONSTRAINT_MIDALIGNED_BOTTOM    
-gyCONSTRAINT_MIDALIGNED_LEFT      = CONSTRAINT_MIDALIGNED_LEFT      
-gyCONSTRAINT_MIDALIGNED_RIGHT     = CONSTRAINT_MIDALIGNED_RIGHT     
+gyCONSTRAINT_CENTRED_VERTICALLY   = CONSTRAINT_CENTRED_VERTICALLY
+gyCONSTRAINT_CENTRED_HORIZONTALLY = CONSTRAINT_CENTRED_HORIZONTALLY
+gyCONSTRAINT_CENTRED_BOTH         = CONSTRAINT_CENTRED_BOTH
+gyCONSTRAINT_LEFT_OF              = CONSTRAINT_LEFT_OF
+gyCONSTRAINT_RIGHT_OF             = CONSTRAINT_RIGHT_OF
+gyCONSTRAINT_ABOVE                = CONSTRAINT_ABOVE
+gyCONSTRAINT_BELOW                = CONSTRAINT_BELOW
+gyCONSTRAINT_ALIGNED_TOP          = CONSTRAINT_ALIGNED_TOP
+gyCONSTRAINT_ALIGNED_BOTTOM       = CONSTRAINT_ALIGNED_BOTTOM
+gyCONSTRAINT_ALIGNED_LEFT         = CONSTRAINT_ALIGNED_LEFT
+gyCONSTRAINT_ALIGNED_RIGHT        = CONSTRAINT_ALIGNED_RIGHT
+gyCONSTRAINT_MIDALIGNED_TOP       = CONSTRAINT_MIDALIGNED_TOP
+gyCONSTRAINT_MIDALIGNED_BOTTOM    = CONSTRAINT_MIDALIGNED_BOTTOM
+gyCONSTRAINT_MIDALIGNED_LEFT      = CONSTRAINT_MIDALIGNED_LEFT
+gyCONSTRAINT_MIDALIGNED_RIGHT     = CONSTRAINT_MIDALIGNED_RIGHT
 
 
 
@@ -147,7 +147,7 @@ class Constraint(object):
         """Sets the horizontal and vertical spacing for the constraint."""
         self._xSpacing = x
         self._ySpacing = y
-        
+
     def Equals(self, a, b):
         """Return TRUE if x and y are approximately equal (for the purposes
         of evaluating the constraint).
@@ -366,9 +366,9 @@ class Constraint(object):
                     changed = True
                     constrainedObject.Move(dc, constrainedObject.GetX(), y3, False)
             return changed
-        
+
         return False
-    
+
 OGLConstraint = wx._core._deprecated(Constraint,
                      "The OGLConstraint name is deprecated, use `ogl.Constraint` instead.")
 
@@ -386,9 +386,9 @@ class CompositeShape(RectangleShape):
         self._oldX = self._xpos
         self._oldY = self._ypos
 
-        self._constraints = [] 
+        self._constraints = []
         self._divisions = [] # In case it's a container
-        
+
     def OnDraw(self, dc):
         x1 = self._xpos - self._width / 2.0
         y1 = self._ypos - self._height / 2.0
@@ -405,7 +405,7 @@ class CompositeShape(RectangleShape):
 
         # For debug purposes /pi
         #dc.DrawRectangle(x1, y1, self._width, self._height)
-        
+
     def OnDrawContents(self, dc):
         for object in self._children:
             object.Draw(dc)
@@ -453,7 +453,7 @@ class CompositeShape(RectangleShape):
         self.GetCanvas().PrepareDC(dc)
 
         #self.Erase(dc)
-        
+
         dc.SetLogicalFunction(OGLRBLF)
         dottedPen = wx.Pen(wx.Colour(0, 0, 0), 1, wx.DOT)
         dc.SetPen(dottedPen)
@@ -477,11 +477,11 @@ class CompositeShape(RectangleShape):
             if self._parent:
                 self._parent.GetEventHandler().OnEndDragLeft(x, y, keys, 0)
             return
-            
+
         self.Erase(dc)
-        
+
         dc.SetLogicalFunction(wx.COPY)
-        
+
         xx, yy = self._canvas.Snap(x, y)
         offsetX = xx - _objectStartX
         offsetY = yy - _objectStartY
@@ -568,7 +568,7 @@ class CompositeShape(RectangleShape):
             self.RemoveChild(child)
             child.Delete()
         RectangleShape.Delete(self)
-        self._constraints = [] 
+        self._constraints = []
         self._divisions = []
 
     def DeleteConstraintsInvolvingChild(self, child):
@@ -705,7 +705,7 @@ class CompositeShape(RectangleShape):
 
         dc = wx.ClientDC(self.GetCanvas())
         self.GetCanvas().PrepareDC(dc)
-        
+
         division.Move(dc, self.GetX(), self.GetY())
         self.Recompute()
         division.Show(True)
@@ -854,7 +854,7 @@ DIVISION_MENU_EDIT_TOP_EDGE         =4
 DIVISION_MENU_EDIT_RIGHT_EDGE       =5
 DIVISION_MENU_EDIT_BOTTOM_EDGE      =6
 DIVISION_MENU_DELETE_ALL            =7
-    
+
 
 
 class PopupDivisionMenu(wx.Menu):
@@ -873,7 +873,7 @@ class PopupDivisionMenu(wx.Menu):
 
     def GetClientData(self):
         return self._clientData
-    
+
     def OnMenu(self, event):
         division = self.GetClientData()
         if event.GetId() == DIVISION_MENU_SPLIT_HORIZONTALLY:
@@ -884,7 +884,7 @@ class PopupDivisionMenu(wx.Menu):
             division.EditEdge(DIVISION_SIDE_LEFT)
         elif event.GetId() == DIVISION_MENU_EDIT_TOP_EDGE:
             division.EditEdge(DIVISION_SIDE_TOP)
-            
+
 
 
 class DivisionShape(CompositeShape):
@@ -920,11 +920,11 @@ class DivisionShape(CompositeShape):
     def SetTopSide(self, shape):
         """Set the the division on the top side of this division."""
         self._topSide = shape
-        
+
     def SetRightSide(self, shape):
         """Set the the division on the right side of this division."""
         self._rightSide = shape
-        
+
     def SetBottomSide(self, shape):
         """Set the the division on the bottom side of this division."""
         self._bottomSide = shape
@@ -932,15 +932,15 @@ class DivisionShape(CompositeShape):
     def GetLeftSide(self):
         """Return the division on the left side of this division."""
         return self._leftSide
-    
+
     def GetTopSide(self):
         """Return the division on the top side of this division."""
         return self._topSide
-    
+
     def GetRightSide(self):
         """Return the division on the right side of this division."""
         return self._rightSide
-    
+
     def GetBottomSide(self):
         """Return the division on the bottom side of this division."""
         return self._bottomSide
@@ -959,11 +959,11 @@ class DivisionShape(CompositeShape):
     def SetLeftSidePen(self, pen):
         """Set the colour for drawing the left side of the division."""
         self._leftSidePen = pen
-        
+
     def SetTopSidePen(self, pen):
         """Set the colour for drawing the top side of the division."""
         self._topSidePen = pen
-        
+
     def GetLeftSidePen(self):
         """Return the pen used for drawing the left side of the division."""
         return self._leftSidePen
@@ -975,7 +975,7 @@ class DivisionShape(CompositeShape):
     def GetLeftSideColour(self):
         """Return the colour used for drawing the left side of the division."""
         return self._leftSideColour
-    
+
     def GetTopSideColour(self):
         """Return the colour used for drawing the top side of the division."""
         return self._topSideColour
@@ -983,25 +983,25 @@ class DivisionShape(CompositeShape):
     def SetLeftSideColour(self, colour):
         """Set the colour for drawing the left side of the division."""
         self._leftSideColour = colour
-        
+
     def SetTopSideColour(self, colour):
         """Set the colour for drawing the top side of the division."""
         self._topSideColour = colour
-        
+
     def GetLeftSideStyle(self):
         """Return the style used for the left side of the division."""
         return self._leftSideStyle
-    
+
     def GetTopSideStyle(self):
         """Return the style used for the top side of the division."""
         return self._topSideStyle
 
     def SetLeftSideStyle(self, style):
         self._leftSideStyle = style
-        
+
     def SetTopSideStyle(self, style):
         self._lefttopStyle = style
-        
+
     def OnDraw(self, dc):
         dc.SetBrush(wx.TRANSPARENT_BRUSH)
         dc.SetBackgroundMode(wx.TRANSPARENT)
@@ -1027,7 +1027,7 @@ class DivisionShape(CompositeShape):
         # how big the division is.
         #dc.SetBrush(wx.RED_BRUSH)
         #dc.DrawRectangle(x1, y1, self.GetWidth(), self.GetHeight())
-        
+
     def OnDrawContents(self, dc):
         CompositeShape.OnDrawContents(self, dc)
 
@@ -1058,7 +1058,7 @@ class DivisionShape(CompositeShape):
                 self._parent.GetEventHandler().OnBeginDragLeft(x, y, keys, attachment)
             return
         Shape.OnBeginDragLeft(x, y, keys, attachment)
-            
+
     def OnEndDragLeft(self, x, y, keys = 0, attachment = 0):
         if self._canvas.HasCapture():
             self._canvas.ReleaseMouse()
@@ -1339,7 +1339,7 @@ class DivisionShape(CompositeShape):
 
         self.Move(dc, newX, self.GetY())
         return True
-    
+
     def AdjustTop(self, top, test):
         """Adjust a side.
 
@@ -1365,7 +1365,7 @@ class DivisionShape(CompositeShape):
         return True
 
     # Resize adjoining divisions.
-    
+
     # Behaviour should be as follows:
     # If right edge moves, find all objects whose left edge
     # adjoins this object, and move left edge accordingly.
@@ -1412,7 +1412,7 @@ class DivisionShape(CompositeShape):
                     if not success and test:
                         return False
         return True
-    
+
     def EditEdge(self, side):
         print "EditEdge() not implemented."
 
@@ -1439,4 +1439,4 @@ class DivisionShape(CompositeShape):
 
         self._canvas.PopupMenu(menu, (mouse_x, mouse_y))
 
-        
+

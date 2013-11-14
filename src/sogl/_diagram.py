@@ -68,7 +68,7 @@ class Diagram(object):
         """
         if object in self._shapeList:
             self._shapeList.remove(object)
-            
+
     def RemoveAllShapes(self):
         """Remove all shapes from the diagram but do not delete the shapes."""
         self._shapeList = []
@@ -79,7 +79,7 @@ class Diagram(object):
             if not shape.GetParent():
                 self.RemoveShape(shape)
                 shape.Delete()
-                
+
     def ShowAll(self, show):
         """Call Show for each shape in the diagram."""
         for shape in self._shapeList:
@@ -104,7 +104,7 @@ class Diagram(object):
     def GetCanvas(self):
         """Return the shape canvas associated with this diagram."""
         return self._diagramCanvas
-        
+
     def FindShape(self, id):
         """Return the shape for the given identifier."""
         for shape in self._shapeList:
@@ -119,13 +119,13 @@ class Diagram(object):
             return self._gridSpacing * int(x / self._gridSpacing + 0.5), self._gridSpacing * int(y / self._gridSpacing + 0.5)
         return x, y
 
-    def SetGridSpacing(self, spacing): 
-        """Sets grid spacing.""" 
-        self._gridSpacing = spacing 
- 
-    def SetSnapToGrid(self, snap): 
-        """Sets snap-to-grid mode.""" 
-        self._snapToGrid = snap 
+    def SetGridSpacing(self, spacing):
+        """Sets grid spacing."""
+        self._gridSpacing = spacing
+
+    def SetSnapToGrid(self, snap):
+        """Sets snap-to-grid mode."""
+        self._snapToGrid = snap
 
     def GetGridSpacing(self):
         """Return the grid spacing."""

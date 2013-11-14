@@ -43,7 +43,7 @@ class BitmapShape(RectangleShape):
     def GetBitmap(self):
         """Return a the bitmap associated with this shape."""
         return self._bitmap
-    
+
     def SetBitmap(self, bitmap):
         """Set the bitmap associated with this shape.
 
@@ -54,7 +54,7 @@ class BitmapShape(RectangleShape):
         self._bitmap = bitmap
         if self._bitmap.Ok():
             self.SetSize(self._bitmap.GetWidth(), self._bitmap.GetHeight())
-            
+
     def SetFilename(self, f):
         """Set the bitmap filename."""
         self._filename = f

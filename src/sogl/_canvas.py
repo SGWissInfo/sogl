@@ -25,22 +25,22 @@ KEY_SHIFT, KEY_CTRL = 1, 2
 def WhollyContains(contains, contained):
     xp1, yp1 = contains.GetX(), contains.GetY()
     xp2, yp2 = contained.GetX(), contained.GetY()
-    
+
     w1, h1 = contains.GetBoundingBoxMax()
     w2, h2 = contained.GetBoundingBoxMax()
-    
+
     left1 = xp1 - w1 / 2.0
     top1 = yp1 - h1 / 2.0
     right1 = xp1 + w1 / 2.0
     bottom1 = yp1 + h1 / 2.0
-    
+
     left2 = xp2 - w2 / 2.0
     top2 = yp2 - h2 / 2.0
     right2 = xp2 + w2 / 2.0
     bottom2 = yp2 + h2 / 2.0
-    
+
     return ((left1 <= left2) and (top1 <= top2) and (right1 >= right2) and (bottom1 >= bottom2))
-    
+
 
 
 class ShapeCanvas(wx.ScrolledWindow):
@@ -64,11 +64,11 @@ class ShapeCanvas(wx.ScrolledWindow):
 
     def GetDiagram(self):
         return self._shapeDiagram
-    
+
     def OnPaint(self, evt):
         dc = wx.PaintDC(self)
         self.PrepareDC(dc)
-        
+
         dc.SetBackground(wx.Brush(self.GetBackgroundColour(), wx.SOLID))
         dc.Clear()
 
@@ -78,7 +78,7 @@ class ShapeCanvas(wx.ScrolledWindow):
     def OnMouseEvent(self, evt):
         dc = wx.ClientDC(self)
         self.PrepareDC(dc)
-        
+
         x, y = evt.GetLogicalPosition(dc)
 
         keys = 0
@@ -95,7 +95,7 @@ class ShapeCanvas(wx.ScrolledWindow):
         if dragging:
             if self._checkTolerance:
                 # the difference between two logical coordinates is a logical coordinate
-                dx = abs(x - self._firstDragX) 
+                dx = abs(x - self._firstDragX)
                 dy = abs(y - self._firstDragY)
                 toler = self.GetDiagram().GetMouseTolerance()
                 if (dx <= toler) and (dy <= toler):
@@ -170,7 +170,7 @@ class ShapeCanvas(wx.ScrolledWindow):
             # Continue dragging
             self.OnDragLeft(False, self._oldDragX, self._oldDragY, keys)
             self.OnDragLeft(True, x, y, keys)
-            self._oldDragX, self._oldDragY = x, y                
+            self._oldDragX, self._oldDragY = x, y
 
         elif evt.LeftUp() and not self._draggedShape and self._dragState == ContinueDraggingLeft:
             self._dragState = NoDragging
@@ -307,11 +307,11 @@ class ShapeCanvas(wx.ScrolledWindow):
             # On second pass, only ever consider non-composites or
             # divisions. If children want to pass up control to
             # the composite, that's up to them.
-            if (object.IsShown() and 
-                   (isinstance(object, DivisionShape) or 
-                    not isinstance(object, CompositeShape)) and 
-                    object.HitTest(x, y) and 
-                    (info == None or isinstance(object, info)) and 
+            if (object.IsShown() and
+                   (isinstance(object, DivisionShape) or
+                    not isinstance(object, CompositeShape)) and
+                    object.HitTest(x, y) and
+                    (info == None or isinstance(object, info)) and
                     (not notObject or not notObject.HasDescendant(object))):
                 temp_attachment, dist = object.HitTest(x, y)
                 if not isinstance(object, LineShape):
@@ -338,7 +338,7 @@ class ShapeCanvas(wx.ScrolledWindow):
 
     def GetQuickEditMode(self):
         return self.GetDiagram().GetQuickEditMode()
-    
+
     def Redraw(self, dc):
         self.GetDiagram().Redraw(dc)
 

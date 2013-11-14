@@ -22,7 +22,7 @@ DragOffsetY = 0.0
 def SOGLInitialize():
     global WhiteBackgroundPen, WhiteBackgroundBrush, TransparentPen
     global BlackForegroundPen, NormalFont
-    
+
     WhiteBackgroundPen = wx.Pen(wx.WHITE, 1, wx.SOLID)
     WhiteBackgroundBrush = wx.Brush(wx.WHITE, wx.SOLID)
 
@@ -61,7 +61,7 @@ class ShapeTextLine(object):
         return self._line
 
 
-    
+
 class ShapeEvtHandler(object):
     def __init__(self, prev = None, shape = None):
         self._previousHandler = prev
@@ -85,7 +85,7 @@ class ShapeEvtHandler(object):
     def OnDelete(self):
         if self!=self.GetShape():
             del self
-            
+
     def OnDraw(self, dc):
         if self._previousHandler:
             self._previousHandler.OnDraw(dc)
@@ -93,15 +93,15 @@ class ShapeEvtHandler(object):
     def OnMoveLinks(self, dc):
         if self._previousHandler:
             self._previousHandler.OnMoveLinks(dc)
-            
+
     def OnMoveLink(self, dc, moveControlPoints = True):
         if self._previousHandler:
             self._previousHandler.OnMoveLink(dc, moveControlPoints)
-            
+
     def OnDrawContents(self, dc):
         if self._previousHandler:
             self._previousHandler.OnDrawContents(dc)
-            
+
     def OnDrawBranches(self, dc, erase = False):
         if self._previousHandler:
             self._previousHandler.OnDrawBranches(dc, erase = erase)
@@ -109,7 +109,7 @@ class ShapeEvtHandler(object):
     def OnSize(self, x, y):
         if self._previousHandler:
             self._previousHandler.OnSize(x, y)
-            
+
     def OnMovePre(self, dc, x, y, old_x, old_y, display = True):
         if self._previousHandler:
             return self._previousHandler.OnMovePre(dc, x, y, old_x, old_y, display)
@@ -137,7 +137,7 @@ class ShapeEvtHandler(object):
     def OnLeftClick(self, x, y, keys, attachment):
         if self._previousHandler:
             self._previousHandler.OnLeftClick(x, y, keys, attachment)
-            
+
     def OnLeftDoubleClick(self, x, y, keys = 0, attachment = 0):
         if self._previousHandler:
             self._previousHandler.OnLeftDoubleClick(x, y, keys, attachment)
@@ -157,7 +157,7 @@ class ShapeEvtHandler(object):
     def OnEndDragLeft(self, x, y, keys = 0, attachment = 0):
         if self._previousHandler:
             self._previousHandler.OnEndDragLeft(x, y, keys, attachment)
-        
+
     def OnDragRight(self, draw, x, y, keys = 0, attachment = 0):
         if self._previousHandler:
             self._previousHandler.OnDragRight(draw, x, y, keys, attachment)
@@ -179,17 +179,17 @@ class ShapeEvtHandler(object):
     def OnSizingBeginDragLeft(self, pt, x, y, keys = 0, attachment = 0):
         if self._previousHandler:
             self._previousHandler.OnSizingBeginDragLeft(pt, x, y, keys, attachment)
-            
+
     def OnSizingEndDragLeft(self, pt, x, y, keys = 0, attachment = 0):
         if self._previousHandler:
             self._previousHandler.OnSizingEndDragLeft(pt, x, y, keys, attachment)
 
     def OnBeginSize(self, w, h):
         pass
-    
+
     def OnEndSize(self, w, h):
         pass
-    
+
     def OnDrawOutline(self, dc, x, y, w, h):
         if self._previousHandler:
             self._previousHandler.OnDrawOutline(dc, x, y, w, h)
@@ -208,23 +208,23 @@ class ShapeEvtHandler(object):
             self._previousHandler.OnChangeAttachment(attachment, line, ordering)
 
 
-            
+
 class Shape(ShapeEvtHandler):
     """SOGL base class
 
     Shape(canvas = None)
-    
+
     The wxShape is the top-level, abstract object that all other objects
     are derived from. All common functionality is represented by wxShape's
     members, and overriden members that appear in derived classes and have
     behaviour as documented for wxShape, are not documented separately.
     """
-    
+
     GraphicsInSizeToContents = False
-    
+
     def __init__(self, canvas = None):
         ShapeEvtHandler.__init__(self)
-        
+
         self._eventHandler = self
         self.SetShape(self)
         self._id = 0
@@ -264,14 +264,14 @@ class Shape(ShapeEvtHandler):
         self._branchStemLength = 10
         self._branchSpacing = 10
         self._branchStyle = BRANCHING_ATTACHMENT_NORMAL
-        
+
         self._regions = []
         self._lines = []
         self._controlPoints = []
         self._attachmentPoints = []
         self._text = []
         self._children = []
-        
+
         # Set up a default region. Much of the above will be put into
         # the region eventually (the duplication is for compatibility)
         region = ShapeRegion()
@@ -303,20 +303,20 @@ class Shape(ShapeEvtHandler):
         self.ClearAttachments()
 
         self._handlerShape = None
-        
+
         if self._canvas:
             self.RemoveFromCanvas(self._canvas)
 
         if self.GetEventHandler():
             self.GetEventHandler().OnDelete()
         self._eventHandler = None
-        
+
     def __del__(self):
         ShapeEvtHandler.__del__(self)
 
     def IsSensitiveTo(self, ops):
         return (self._sensitivity & ops) == ops
-    
+
     def SetShape(self, sh):
         self._handlerShape = sh
 
@@ -333,7 +333,7 @@ class Shape(ShapeEvtHandler):
 
     def SetRotation(self, rotation):
         self._rotation = rotation
-        
+
     def SetHighlight(self, hi, recurse = False):
         """Set the highlight for a shape. Shape highlighting is unimplemented."""
         self._highlighted = hi
@@ -359,7 +359,7 @@ class Shape(ShapeEvtHandler):
         if recursive:
             for shape in self._children:
                 shape.SetSensitivityFilter(sens, True)
-                
+
     def AddSensitivityFilter(self, op, recursive = False):
         self._sensitivity |= op
         if recursive:
@@ -398,9 +398,9 @@ class Shape(ShapeEvtHandler):
         mode can be one of the following:
 
         SHADOW_NONE
-          No shadow (the default). 
+          No shadow (the default).
         SHADOW_LEFT
-          Shadow on the left side. 
+          Shadow on the left side.
         SHADOW_RIGHT
           Shadow on the right side.
         """
@@ -447,7 +447,7 @@ class Shape(ShapeEvtHandler):
         """Remove the shape from the canvas."""
         if self.Selected():
             self.Select(False)
-        
+
         self._canvas = None
         theCanvas.RemoveShape(self)
         for object in self._children:
@@ -465,11 +465,11 @@ class Shape(ShapeEvtHandler):
             self._text = ""
         if regionId < len(self._regions):
             self._regions[regionId].ClearText()
-            
+
     def ClearRegions(self):
         """Clear the ShapeRegions from the shape."""
         self._regions = []
-            
+
     def AddRegion(self, region):
         """Add a region to the shape."""
         self._regions.append(region)
@@ -494,7 +494,7 @@ class Shape(ShapeEvtHandler):
 
         width += 4 # Allowance for inaccurate mousing
         height += 4
-        
+
         left = self._xpos - width / 2.0
         top = self._ypos - height / 2.0
         right = self._xpos + width / 2.0
@@ -522,10 +522,10 @@ class Shape(ShapeEvtHandler):
 
             return nearest_attachment, nearest
         return False
-    
+
     # Format a text string according to the region size, adding
     # strings with positions to region text list
-    
+
     def FormatText(self, dc, s, i = 0):
         """Reformat the given text region; defaults to formatting the
         default region.
@@ -581,7 +581,7 @@ class Shape(ShapeEvtHandler):
                     Shape.GraphicsInSizeToContents = False
                 else:
                     self.Erase(dc)
-                    
+
                 self.SetSize(actualW + 2 * self._textMarginX, actualH + 2 * self._textMarginY)
                 self.Move(dc, self._xpos, self._ypos)
                 self.EraseContents(dc)
@@ -640,9 +640,9 @@ class Shape(ShapeEvtHandler):
         can be a bit list of the following:
 
         FORMAT_NONE
-          No formatting. 
+          No formatting.
         FORMAT_CENTRE_HORIZ
-          Horizontal centring. 
+          Horizontal centring.
         FORMAT_CENTRE_VERT
           Vertical centring.
         """
@@ -661,7 +661,7 @@ class Shape(ShapeEvtHandler):
 
         if regionId < len(self._regions):
             self._regions[regionId].SetColour(the_colour)
-            
+
     def GetTextColour(self, regionId = 0):
         """Get the colour for the specified text region."""
         if regionId >= len(self._regions):
@@ -761,7 +761,7 @@ class Shape(ShapeEvtHandler):
     def OnDrawContents(self, dc):
         if not self._regions:
             return
-        
+
         bound_x, bound_y = self.GetBoundingBoxMin()
 
         if self._pen:
@@ -779,7 +779,7 @@ class Shape(ShapeEvtHandler):
 
             if not self.GetDisableLabel():
                 DrawFormattedText(dc, region.GetFormattedText(), self._xpos, self._ypos, bound_x - 2 * self._textMarginX, bound_y - 2 * self._textMarginY, region.GetFormatMode())
-            
+
 
     def DrawContents(self, dc):
         """Draw the internal graphic of the shape (such as text).
@@ -848,7 +848,7 @@ class Shape(ShapeEvtHandler):
         for line in self._lines:
             if attachment == -1 or (line.GetTo() == self and line.GetAttachmentTo() == attachment or line.GetFrom() == self and line.GetAttachmentFrom() == attachment):
                 line.Draw(dc)
-                
+
         if recurse:
             for child in self._children:
                 child.DrawLinks(dc, attachment, recurse)
@@ -893,7 +893,7 @@ class Shape(ShapeEvtHandler):
             return False
 
         newAttachment, distance = hit
-        
+
         self.EraseLinks(dc)
 
         if to_move.GetTo() == self:
@@ -904,7 +904,7 @@ class Shape(ShapeEvtHandler):
         # The links in a new ordering
         # First, add all links to the new list
         newOrdering = self._lines[:]
-        
+
         # Delete the line object from the list of links; we're going to move
         # it to another position in the list
         del newOrdering[newOrdering.index(to_move)]
@@ -1014,7 +1014,7 @@ class Shape(ShapeEvtHandler):
         if not self.IsSensitiveTo(OP_CLICK_RIGHT):
             attachment, dist = self._parent.HitTest(x, y)
             self._parent.GetEventHandler().OnRightClick(x, y, keys, attachment)
-            
+
     def OnDragLeft(self, draw, x, y, keys = 0, attachment = 0):
         if not self.IsSensitiveTo(OP_DRAG_LEFT):
             if self._parent:
@@ -1041,7 +1041,7 @@ class Shape(ShapeEvtHandler):
 
     def OnBeginDragLeft(self, x, y, keys = 0, attachment = 0):
         global DragOffsetX, DragOffsetY
-        
+
         if not self.IsSensitiveTo(OP_DRAG_LEFT):
             if self._parent:
                 hit = self._parent.HitTest(x, y)
@@ -1055,7 +1055,7 @@ class Shape(ShapeEvtHandler):
 
         dc = wx.ClientDC(self.GetCanvas())
         self.GetCanvas().PrepareDC(dc)
-        
+
         # New policy: don't erase shape until end of drag.
         # self.Erase(dc)
         xx = x + DragOffsetX
@@ -1127,7 +1127,7 @@ class Shape(ShapeEvtHandler):
                 ]
 
         dc.DrawLines(points)
-        
+
     def Attach(self, can):
         """Set the shape's internal canvas pointer to point to the given canvas."""
         self._canvas = can
@@ -1273,7 +1273,7 @@ class Shape(ShapeEvtHandler):
                 other._lines.insert(positionTo, line)
             else:
                 other._lines.append(line)
-            
+
         line.SetFrom(self)
         line.SetTo(other)
         line.SetAttachments(attachFrom, attachTo)
@@ -1281,7 +1281,7 @@ class Shape(ShapeEvtHandler):
         dc = wx.ClientDC(self._canvas)
         self._canvas.PrepareDC(dc)
         self.MoveLinks(dc)
-        
+
     def RemoveLine(self, line):
         """Remove the given line from the shape's list of attached lines."""
         if line.GetFrom() == self:
@@ -1369,7 +1369,7 @@ class Shape(ShapeEvtHandler):
 
         widthMin = minX + CONTROL_POINT_SIZE + 2
         heightMin = minY + CONTROL_POINT_SIZE + 2
-        
+
         # Offsets from main object
         top = -heightMin / 2.0
         bottom = heightMin / 2.0 + (maxY - minY)
@@ -1411,7 +1411,7 @@ class Shape(ShapeEvtHandler):
             control.Delete()
             self._controlPoints.remove(control)
         self._controlPoints = []
-        
+
         # Children of divisions are contained objects,
         # so stop here
         if not isinstance(self, DivisionShape):
@@ -1563,7 +1563,7 @@ class Shape(ShapeEvtHandler):
         Must be overridden.
         """
         return 0, 0
-    
+
     def HasDescendant(self, image):
         """TRUE if image is a descendant of this composite."""
         if image == self:
@@ -1678,7 +1678,7 @@ class Shape(ShapeEvtHandler):
 
     def GetBranchingAttachmentInfo(self, attachment):
         """Get information about where branching connections go.
-        
+
         Returns FALSE if there are no lines at this attachment.
         """
         physicalAttachment = self.LogicalToPhysicalAttachment(attachment)
@@ -1695,7 +1695,7 @@ class Shape(ShapeEvtHandler):
         neck = wx.RealPoint()
         shoulder1 = wx.RealPoint()
         shoulder2 = wx.RealPoint()
-        
+
         # Assume that we have attachment points 0 to 3: top, right, bottom, left
         if physicalAttachment == 0:
             neck[0] = self.GetX()
@@ -1709,7 +1709,7 @@ class Shape(ShapeEvtHandler):
         elif physicalAttachment == 1:
             neck[0] = root[0] + self._branchNeckLength
             neck[1] = root[1]
-            
+
             shoulder1[0] = neck[0]
             shoulder2[0] = neck[0]
 
@@ -1753,7 +1753,7 @@ class Shape(ShapeEvtHandler):
         elif physicalAttachment == 2:
             pt[1] = neck[1] + self._branchStemLength
             pt[0] = shoulder1[0] + n * self._branchStemLength
-            
+
             stemPt[0] = pt[0]
             stemPt[1] = neck[1]
         elif physicalAttachment == 1:
@@ -1782,7 +1782,7 @@ class Shape(ShapeEvtHandler):
             elif lineShape.GetTo() == self and lineShape.GetAttachmentTo() == attachment:
                 count += 1
         return count
-    
+
     def GetBranchingAttachmentRoot(self, attachment):
         """Get the root point at the given attachment."""
         physicalAttachment = self.LogicalToPhysicalAttachment(attachment)
@@ -1997,7 +1997,7 @@ class Shape(ShapeEvtHandler):
     def GetFixedHeight(self):
         """TRUE if the shape cannot be resized in the vertical plane."""
         return self._fixedHeight
-    
+
     def SetSpaceAttachments(self, sp):
         """Indicate whether lines should be spaced out evenly at the point
         they touch the node (sp = True), or whether they should join at a single
@@ -2282,7 +2282,7 @@ class Shape(ShapeEvtHandler):
             pt._controlPointDragEndWidth = newWidth
             pt._controlPointDragEndHeight = newHeight
             self.GetEventHandler().OnDrawOutline(dc, pt._controlPointDragPosX, pt._controlPointDragPosY, newWidth, newHeight)
-            
+
     def OnSizingEndDragLeft(self, pt, x, y, keys = 0, attachment = 0):
         dc = wx.ClientDC(self.GetCanvas())
         self.GetCanvas().PrepareDC(dc)
@@ -2319,7 +2319,7 @@ class Shape(ShapeEvtHandler):
             self._canvas.Redraw(dc)
 
 
-            
+
 class RectangleShape(Shape):
     """
     The wxRectangleShape has rounded or square corners.
@@ -2373,7 +2373,7 @@ class RectangleShape(Shape):
     def GetCornerRadius(self):
         """Get the radius of the rectangle's rounded corners."""
         return self._cornerRadius
-    
+
     def SetCornerRadius(self, rad):
         """Set the radius of the rectangle's rounded corners.
 
@@ -2401,7 +2401,7 @@ class RectangleShape(Shape):
         self._height = h
 
 
-        
+
 class PolygonShape(Shape):
     """A PolygonShape's shape is defined by a number of points passed to
     the object's constructor. It can be used to create new shapes such as
@@ -2409,7 +2409,7 @@ class PolygonShape(Shape):
     """
     def __init__(self):
         Shape.__init__(self)
-        
+
         self._points = None
         self._originalPoints = None
 
@@ -2461,7 +2461,7 @@ class PolygonShape(Shape):
 
     def SetOriginalHeight(self, h):
         self._originalHeight = h
-        
+
     def CalculateBoundingBox(self):
         # Calculate bounding box at construction (and presumably resize) time
         left = 10000
@@ -2746,7 +2746,7 @@ class PolygonShape(Shape):
         # Added by Pierre Hjälm. If we don't do this the outline will be
         # the wrong size. Hopefully it won't have any ill effects.
         self.UpdateOriginalPoints()
-        
+
         self._rotation = theta
 
         self.CalculatePolygonCentre()
@@ -2766,7 +2766,7 @@ class PolygonShape(Shape):
         dc.SetBrush(wx.TRANSPARENT_BRUSH)
 
         # Code for CTRL-drag in C++ version commented out
-        
+
         pt.CalculateNewSize(x, y)
 
         self.GetEventHandler().OnDrawOutline(dc, self.GetX(), self.GetY(), pt.GetNewSize()[0], pt.GetNewSize()[1])
@@ -2776,7 +2776,7 @@ class PolygonShape(Shape):
         self.GetCanvas().PrepareDC(dc)
 
         self.Erase(dc)
-        
+
         dc.SetLogicalFunction(OGLRBLF)
 
         bound_x, bound_y = self.GetBoundingBoxMin()
@@ -2857,7 +2857,7 @@ class EllipseShape(Shape):
 
     def SetHeight(self, h):
         self._height = h
-        
+
     def OnDraw(self, dc):
         if self._shadowMode != SHADOW_NONE:
             if self._shadowBrush:
@@ -3129,7 +3129,7 @@ class ControlPoint(RectangleShape):
         self._oldCursor = None
         self._visible = True
         self._eraseObject = True
-        
+
     # Don't even attempt to draw any text - waste of time
     def OnDrawContents(self, dc):
         pass
@@ -3161,7 +3161,7 @@ class ControlPoint(RectangleShape):
     def SetEraseObject(self, er):
         self._eraseObject = er
 
-        
+
 class PolygonControlPoint(ControlPoint):
     def __init__(self, theCanvas, object, size, vertex, the_xoffset, the_yoffset):
         ControlPoint.__init__(self, theCanvas, object, size, the_xoffset, the_yoffset, 0)
@@ -3172,7 +3172,7 @@ class PolygonControlPoint(ControlPoint):
 
     def GetNewSize(self):
         return self._newSize
-    
+
     # Calculate what new size would be, at end of resize
     def CalculateNewSize(self, x, y):
         bound_x, bound_y = self.GetShape().GetBoundingBoxMax()
