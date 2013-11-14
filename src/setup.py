@@ -6,7 +6,7 @@ from setuptools import setup
 __id__ = '$Id$'
 __revision__ = '$Revision$'
 
-VERSION = '0.2.0'
+VERSION = '0.2.1.dev'
 
 setup(name='sogl',
       version='%s'%VERSION,
