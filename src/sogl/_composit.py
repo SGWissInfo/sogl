@@ -368,9 +368,17 @@ class Constraint(object):
             return changed
         
         return False
-    
-OGLConstraint = wx._core._deprecated(Constraint,
-                     "The OGLConstraint name is deprecated, use `ogl.Constraint` instead.")
+
+
+try:
+    deprecated = wx._core.deprecated
+except AttributeError:
+    deprecated = wx._core._deprecated
+OGLConstraint = deprecated(
+    Constraint,
+    "The OGLConstraint name is deprecated, use `ogl.Constraint` instead."
+    )
+del deprecated
 
 
 class CompositeShape(RectangleShape):
