@@ -52,7 +52,7 @@ class DividedShapeControlPoint(ControlPoint):
         dc.SetBrush(wx.TRANSPARENT_BRUSH)
 
         dividedObject = self._shape
-        
+
         x1 = dividedObject.GetX() - dividedObject.GetWidth() / 2.0
         y1 = y
         x2 = dividedObject.GetX() + dividedObject.GetWidth() / 2.0
@@ -68,7 +68,7 @@ class DividedShapeControlPoint(ControlPoint):
         dividedObject = self._shape
         if not dividedObject.GetRegions()[self.regionId]:
             return
-        
+
         thisRegion = dividedObject.GetRegions()[self.regionId]
         nextRegion = None
 
@@ -86,7 +86,7 @@ class DividedShapeControlPoint(ControlPoint):
         # Save values
         theRegionTop = 0
         nextRegionBottom = 0
-        
+
         for i in range(len(dividedObject.GetRegions())):
             region = dividedObject.GetRegions()[i]
             proportion = region._regionProportionY
@@ -95,7 +95,7 @@ class DividedShapeControlPoint(ControlPoint):
 
             if region == thisRegion:
                 thisRegionTop = currentY
-                
+
                 if i + 1 < len(dividedObject.GetRegions()):
                     nextRegion = dividedObject.GetRegions()[i + 1]
             if region == nextRegion:
@@ -130,7 +130,7 @@ class DividedShapeControlPoint(ControlPoint):
         dividedObject.SetRegionSizes()
         dividedObject.Draw(dc)
         dividedObject.GetEventHandler().OnMoveLinks(dc)
-        
+
 
 
 class DividedShape(RectangleShape):
@@ -221,7 +221,7 @@ class DividedShape(RectangleShape):
             defaultProportion = 0.0
         currentY = self._ypos - self._height / 2.0
         maxY = self._ypos + self._height / 2.0
-        
+
         for region in self.GetRegions():
             if region._regionProportionY <= 0:
                 proportion = defaultProportion
@@ -390,11 +390,11 @@ class DividedShape(RectangleShape):
                 currentY = actualY
 
                 i += 1
-                
+
     def EditRegions(self):
         """Edit the region colours and styles. Not implemented."""
         print "EditRegions() is unimplemented"
-        
+
     def OnRightClick(self, x, y, keys = 0, attachment = 0):
         if keys & KEY_CTRL:
             self.EditRegions()

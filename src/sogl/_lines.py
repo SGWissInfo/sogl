@@ -67,7 +67,7 @@ class ArrowHead(object):
             self._id = arrowId
             if self._id == -1:
                 self._id = wx.NewId()
-            
+
     def _GetType(self):
         return self._arrowType
 
@@ -82,7 +82,7 @@ class ArrowHead(object):
 
     def GetYOffset(self):
         return self._yOffset
-    
+
     def GetSpacing(self):
         return self._spacing
 
@@ -99,7 +99,7 @@ class ArrowHead(object):
             scale = float(size) / oldWidth
             if scale != 1:
                 self._metaFile.Scale(scale, scale)
-                
+
     def GetName(self):
         return self._arrowName
 
@@ -173,7 +173,7 @@ class LabelShape(RectangleShape):
 
     def OnRightClick(self, x, y, keys = 0, attachment = 0):
         self._lineShape.GetEventHandler().OnRightClick(x, y, keys, attachment)
-        
+
 
 
 class LineShape(Shape):
@@ -230,7 +230,7 @@ class LineShape(Shape):
     def GetFrom(self):
         """Return the 'from' object."""
         return self._from
-    
+
     def GetTo(self):
         """Return the 'to' object."""
         return self._to
@@ -282,7 +282,7 @@ class LineShape(Shape):
     def MakeLineControlPoints(self, n):
         """Make a given number of control points (minimum of two)."""
         self._lineControlPoints = []
-        
+
         for _ in range(n):
             point = wx.RealPoint(-999, -999)
             self._lineControlPoints.append(point)
@@ -290,7 +290,7 @@ class LineShape(Shape):
         # pi: added _initialised to keep track of when we have set
         # the middle points to something other than (-999, -999)
         self._initialised = False
-        
+
     def InsertLineControlPoint(self, dc = None, point = None):
         """Insert a control point at an optional given position."""
         if dc:
@@ -344,7 +344,7 @@ class LineShape(Shape):
                         y1 = last_point[1]
                     self._lineControlPoints[i] = wx.RealPoint((x2 - x1) / 2.0 + x1, (y2 - y1) / 2.0 + y1)
                     self._initialised = True
-                    
+
     def FormatText(self, dc, s, i):
         """Format a text string according to the region size, adding
         strings with positions to region text list.
@@ -473,7 +473,7 @@ class LineShape(Shape):
 
         for i in range(len(self._lineControlPoints) - 2):
             GraphicsStraightenLine(self._lineControlPoints[i], self._lineControlPoints[i + 1])
-                
+
         if dc:
             self.Draw(dc)
 
@@ -523,10 +523,10 @@ class LineShape(Shape):
                     xp, yp = self.GetLabelPosition(i)
                     # Offset region from default label position
                     cx, cy = region.GetPosition()
-                    cw, ch = region.GetSize() 
+                    cw, ch = region.GetSize()
                     cx += xp
                     cy += yp
-                    
+
                     rLeft = cx - cw / 2.0
                     rTop = cy - ch / 2.0
                     rRight = cx + cw / 2.0
@@ -607,7 +607,7 @@ class LineShape(Shape):
                 realOffset = XOffset * totalLength
 
             positionOnLineX, positionOnLineY = GetPointOnLine(second_line_point[0], second_line_point[1], first_line_point[0], first_line_point[1], realOffset)
-            
+
             startPositionX = second_line_point[0]
             startPositionY = second_line_point[1]
         elif ap == ARROW_POSITION_END:
@@ -617,9 +617,9 @@ class LineShape(Shape):
             if proportionalOffset:
                 totalLength = math.sqrt((second_last_line_point[0] - last_line_point[0]) * (second_last_line_point[0] - last_line_point[0]) + (second_last_line_point[1] - last_line_point[1]) * (second_last_line_point[1] - last_line_point[1]));
                 realOffset = XOffset * totalLength
-            
+
             positionOnLineX, positionOnLineY = GetPointOnLine(second_last_line_point[0], second_last_line_point[1], last_line_point[0], last_line_point[1], realOffset)
-            
+
             startPositionX = second_last_line_point[0]
             startPositionY = second_last_line_point[1]
         elif ap == ARROW_POSITION_MIDDLE:
@@ -665,7 +665,7 @@ class LineShape(Shape):
 
             x4 = x3 - d * math.sin(theta)
             y4 = y3 + d * math.cos(theta)
-            
+
             deltaX = x4 - positionOnLineX
             deltaY = y4 - positionOnLineY
 
@@ -815,7 +815,7 @@ class LineShape(Shape):
                 y2 = point[1]
 
         return x2 - x1, y2 - y1
-        
+
     # For a node image of interest, finds the position of this arc
     # amongst all the arcs which are attached to THIS SIDE of the node image,
     # and the number of same.
@@ -827,7 +827,7 @@ class LineShape(Shape):
         """
         n = -1
         num = 0
-        
+
         if image == self._to:
             this_attachment = self._attachmentTo
         else:
@@ -915,7 +915,7 @@ class LineShape(Shape):
         # again, but this time (and from now on) we use the middle
         # points to calculate the end points.
         # This was buggy in the C++ version too.
-        
+
         self.SetEnds(end_x, end_y, other_end_x, other_end_y)
 
         if len(self._lineControlPoints) > 2:
@@ -1039,7 +1039,7 @@ class LineShape(Shape):
 
     def OnEraseControlPoints(self, dc):
         # Erase temporary label rectangles if necessary
-        
+
         for i in range(3):
             if self._labelObjects[i]:
                 self._labelObjects[i].Erase(dc)
@@ -1151,7 +1151,7 @@ class LineShape(Shape):
             pt.SetY(y)
             pt._point[0] = x
             pt._point[1] = y
-            
+
             old_pen = self.GetPen()
             old_brush = self.GetBrush()
 
@@ -1159,7 +1159,7 @@ class LineShape(Shape):
             self.SetBrush(wx.TRANSPARENT_BRUSH)
 
             self.GetEventHandler().OnMoveLink(dc, False)
-            
+
             self.SetPen(old_pen)
             self.SetBrush(old_brush)
 
@@ -1259,24 +1259,24 @@ class LineShape(Shape):
         type may currently be one of:
 
         ARROW_HOLLOW_CIRCLE
-          Hollow circle. 
+          Hollow circle.
         ARROW_FILLED_CIRCLE
-          Filled circle. 
+          Filled circle.
         ARROW_ARROW
-          Conventional arrowhead. 
+          Conventional arrowhead.
         ARROW_SINGLE_OBLIQUE
-          Single oblique stroke. 
+          Single oblique stroke.
         ARROW_DOUBLE_OBLIQUE
-          Double oblique stroke. 
+          Double oblique stroke.
         ARROW_DOUBLE_METAFILE
-          Custom arrowhead. 
+          Custom arrowhead.
 
         end may currently be one of:
 
         ARROW_POSITION_END
-          Arrow appears at the end. 
+          Arrow appears at the end.
         ARROW_POSITION_START
-          Arrow appears at the start. 
+          Arrow appears at the start.
 
         arrowSize specifies the length of the arrow.
 
@@ -1393,7 +1393,7 @@ class LineShape(Shape):
                 self._arcArrows.remove(arrow)
                 return True
         return False
-    
+
     def DeleteArrowHeadId(self, id):
         """Delete arrowhead by id."""
         for arrow in self._arcArrows:
@@ -1457,7 +1457,7 @@ class LineShape(Shape):
                 self._alignmentStart != LINE_ALIGNMENT_HORIZ
             elif not isHoriz and self._alignmentStart & LINE_ALIGNMENT_HORIZ == LINE_ALIGNMENT_HORIZ:
                 self._alignmentStart -= LINE_ALIGNMENT_HORIZ
-            
+
     def SetAlignmentType(self, isEnd, alignType):
         if isEnd:
             if alignType == LINE_ALIGNMENT_TO_NEXT_HANDLE:
@@ -1471,7 +1471,7 @@ class LineShape(Shape):
                     self._alignmentStart |= LINE_ALIGNMENT_TO_NEXT_HANDLE
             elif self._alignmentStart & LINE_ALIGNMENT_TO_NEXT_HANDLE == LINE_ALIGNMENT_TO_NEXT_HANDLE:
                 self._alignmentStart -= LINE_ALIGNMENT_TO_NEXT_HANDLE
-            
+
     def GetAlignmentOrientation(self, isEnd):
         if isEnd:
             return self._alignmentEnd & LINE_ALIGNMENT_HORIZ == LINE_ALIGNMENT_HORIZ
@@ -1502,13 +1502,13 @@ class LineShape(Shape):
     def OnCreateLabelShape(self, parent, region, w, h):
         return LabelShape(parent, region, w, h)
 
-    
+
     def OnLabelMovePre(self, dc, labelShape, x, y, old_x, old_y, display):
         labelShape._shapeRegion.SetSize(labelShape.GetWidth(), labelShape.GetHeight())
 
         # Find position in line's region list
         i = self._regions.index(labelShape._shapeRegion)
-                
+
         xx, yy = self.GetLabelPosition(i)
         # Set the region's offset, relative to the default position for
         # each region.
@@ -1522,4 +1522,4 @@ class LineShape(Shape):
             labelShape.FormatText(dc, s, i)
             self.DrawRegion(dc, labelShape._shapeRegion, xx, yy)
         return True
-    
+

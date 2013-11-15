@@ -32,4 +32,3 @@ from _drawn import *
 import wx._core as _wx
 __docfilter__ = _wx.__DocFilter(globals())
 __all__ = [name for name in dir() if not name.startswith('_')]
-
