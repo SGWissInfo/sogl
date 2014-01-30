@@ -3,7 +3,7 @@
 
 from setuptools import setup
 
-VERSION = '0.2.1.dev'
+VERSION = '0.2.1'
 
 setup(
     name='sogl',
@@ -11,6 +11,8 @@ setup(
     description='Simplified Object Graph Library',
     author='Klaus Zimmermann',
     author_email='klaus.zimmermann@fmf.uni-freiburg.de',
+    maintainer='Alexander Held',
+    maintainer_email='alexander.held@fmf.uni-freiburg.de',
     url='https://github.com/SGWissInfo/sogl',
     install_requires=[
         'wxPython',
